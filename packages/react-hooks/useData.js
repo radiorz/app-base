@@ -1,4 +1,8 @@
-// 简单的避免竞态的请求
+
+/**
+ * 简单的
+ * @deprecated Use {@link ahook useRequest} instead.
+ */
 export function useData({ url, method = "GET" }) {
   const [data, setData] = useState(null);
   useEffect(() => {

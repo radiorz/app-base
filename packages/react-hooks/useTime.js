@@ -14,18 +14,11 @@
 
 import { useState, useEffect } from "react";
 // import { useDispatch } from "react-redux";
-
-export default function useTime(interval) {
+import { useInterval } from "./useInterval";
+export default function useTime({ interval = 500 }) {
   const [currentTime, setCurrentTime] = useState(new Date());
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCurrentTime(new Date());
-    }, interval);
-
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, []);
+  useInterval(() => {
+    setCurrentTime(new Date());
+  }, interval);
   return { currentTime };
 }
