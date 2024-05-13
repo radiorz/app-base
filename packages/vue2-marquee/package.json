@@ -1,5 +1,5 @@
 {
-  "name": "vue2-marquee-directive",
+  "name": "@abm/vue2-marquee",
   "private": true,
   "version": "0.0.0",
   "type": "module",
