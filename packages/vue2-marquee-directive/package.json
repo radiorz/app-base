@@ -1,0 +1,25 @@
+{
+  "name": "vue2-marquee-directive",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "files": [
+    "dist",
+    "index.d.ts"
+  ],
+  "main": "./dist/marquee.umd.cjs",
+  "module": "./dist/marquee.js",
+  "types": "./index.d.ts",
+  "exports": {
+    "types": "./index.d.ts",
+    "import": "./dist/marquee.js",
+    "require": "./dist/marquee.umd.cjs"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "vite": "^5.2.10"
+  }
+}
