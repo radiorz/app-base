@@ -78,7 +78,7 @@
   <script src="../../dist/marquee.umd.cjs"></script>
   <script>
     // import marquee from 'marquee'
-    Vue.directive('marquee', window.Marquee.default)
+    Vue.use(window.Marquee.marqueePlugin)
     // Vue.directive('marquee', {
     //   bind(el, binding) {
     //     // marquee(el, binding.value)

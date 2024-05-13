@@ -5,7 +5,7 @@ export var SCROLL_DIRECTIONS = {
   left: "left",
   right: "right",
 };
-export default async function marquee(el, settings = {}) {
+export async function marquee(el, settings = {}) {
   try {
     Vue.nextTick(() => {
       var parent = el.parentNode; // 父节点
@@ -154,4 +154,8 @@ export default async function marquee(el, settings = {}) {
   } catch (error) {
     console.warn(`设置marquee出错`, error);
   }
+}
+
+export function marqueePlugin(Vue) {
+  Vue.directive("marquee", marquee);
 }
