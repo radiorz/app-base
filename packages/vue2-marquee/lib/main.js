@@ -5,9 +5,15 @@ export var SCROLL_DIRECTIONS = {
   left: "left",
   right: "right",
 };
+// TODO 
+// 这里取的父节点，不是一种很好的做法，最好是自己生children比较合适
+
+
 export async function marquee(el, settings = {}) {
   try {
+    
     Vue.nextTick(() => {
+      // 子节点
       var parent = el.parentNode; // 父节点
       var resets = []; // 重置属性
       var { scrollDirection, scrollSpeed, auto = true } = settings;
