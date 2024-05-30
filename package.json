@@ -1,5 +1,5 @@
 {
-  "name": "application-build-machine",
+  "name": "app-base",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
