@@ -79,16 +79,42 @@ export class Action<Device> {
 }
 
 export class Store {}
+export interface IConnector {}
+export abstract class Client implements IClient {
+  connectors: Map<string, IConnector> = new Map();
+  constructor(options: Partial<IClient>) {}
 
-export class Client implements OnInit, OnDestroy {
   id: string = "";
-  init() {}
-  destroy() {}
-  onServiceReady() {}
-  run() {}
+  abstract init(): void;
+  abstract destroy(): void;
   // 退出界面
-  onExit() {}
-  onError() {}
+  abstract onExit(): void;
+  // 出错了
+  abstract onError(): void;
+}
+interface IStoreDriver {}
+interface StoreCallback {
+  (name: string, payload: any): void;
+}
+export interface IStore {
+  name: string; // 表名
+  driver: IStoreDriver;
+  // 增删改查
+  create(): void;
+  delete(): void;
+  update(): void;
+  find(): void;
+  count(): void;
+  batch_create(): void;
+  batch_delete(): void;
+  batch_update(): void;
+  batch_find(): void;
+  export(): void;
+  import(): void;
+  // 当api被调用时或当数据改变时
+  on(cb: StoreCallback): void;
+  // 额外的功能
+  // 最高300条的存储限制
 }
 
 export class ParentChildManager<Device extends Client> {
