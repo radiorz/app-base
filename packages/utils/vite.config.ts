@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 import packageJson from "./package.json";
+import { fileURLToPath, URL } from "node:url";
 const name = packageJson.name.split("/")[1];
 export default defineConfig({
   build: {
@@ -7,6 +8,11 @@ export default defineConfig({
       entry: "./lib/main.ts",
       name: toBigCamelCase(name),
       fileName: name,
+    },
+  },
+  resolve: {
+    alias: {
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
 });

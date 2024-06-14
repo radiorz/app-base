@@ -1,5 +1,5 @@
 import { SimpleCrypto } from "../lib/crypt";
-const crypto = new SimpleCrypto("meeyibodyencryptdecryptpassword1");
+const crypto = new SimpleCrypto("tikkhbodyencryptdecryptpassword1");
 const original = "aaa";
 const dtext = crypto.aesEncrypt(original);
 

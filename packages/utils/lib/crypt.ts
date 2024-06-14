@@ -21,7 +21,7 @@ export class SimpleCrypto {
    */
   aesEncrypt(string = "") {
     const cipher = CryptoJS.AES.encrypt(string, this.cryptKey, cryptoOptions);
-    return cipher.toString();
+    return CryptoJS.enc.Hex.stringify(cipher.ciphertext);
   }
 
   /**
@@ -30,7 +30,11 @@ export class SimpleCrypto {
    * @returns {string}
    */
   aesDecrypt(string = "") {
-    const decipher = CryptoJS.AES.decrypt(string, this.cryptKey, cryptoOptions);
+    const decipher = CryptoJS.AES.decrypt(
+      CryptoJS.enc.Hex.parse(string).toString(),
+      this.cryptKey,
+      cryptoOptions
+    );
     return CryptoJS.enc.Utf8.stringify(decipher);
   }
 }
