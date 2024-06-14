@@ -31,6 +31,7 @@ export interface IResource<Resource> {
   batchUpdate: (data: Resource[]) => Resource[];
   find: (id: any) => Resource | null;
   batchFind: (query: any) => Resource[]; // 列出 包括 list/query/sort/pagination/filter/counting
+  count: () => void;
   tree?: Function;
   export: () => Resource[];
   import: () => Resource[];
@@ -78,13 +79,19 @@ export class Action<Device> {
   }
 }
 
-export class Store {}
-export interface IConnector {}
+export interface IConnector {
+  on(message: any): void; // 监听获取消息
+  onEmit(message: any): void; // 监听发送消息
+  emit(message: any): void; // 发送消息
+  driver: IConnectorDriver;
+}
+interface IConnectorDriver {}
 export abstract class Client implements IClient {
   connectors: Map<string, IConnector> = new Map();
   constructor(options: Partial<IClient>) {}
 
   id: string = "";
+  // 生命周期
   abstract init(): void;
   abstract destroy(): void;
   // 退出界面
@@ -92,6 +99,15 @@ export abstract class Client implements IClient {
   // 出错了
   abstract onError(): void;
 }
+
+export interface IProtocol {
+  emit(): void;
+  on(): void;
+  // 任何其他东西
+  [props: string]: any;
+}
+
+export class Store {}
 interface IStoreDriver {}
 interface StoreCallback {
   (name: string, payload: any): void;
@@ -99,18 +115,7 @@ interface StoreCallback {
 export interface IStore {
   name: string; // 表名
   driver: IStoreDriver;
-  // 增删改查
-  create(): void;
-  delete(): void;
-  update(): void;
-  find(): void;
-  count(): void;
-  batch_create(): void;
-  batch_delete(): void;
-  batch_update(): void;
-  batch_find(): void;
-  export(): void;
-  import(): void;
+
   // 当api被调用时或当数据改变时
   on(cb: StoreCallback): void;
   // 额外的功能

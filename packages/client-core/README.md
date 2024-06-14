@@ -13,15 +13,23 @@
 
 ```
 const client = {
-  connectors: {},
+  ios:[],
   services: {},
   drivers: {},// 驱动
   // 模块 模块可能具备client的所有能力
   modules: {},
   stores: {},
   logger: {},
-
 }
+
+const io =await createIO()
+client.useIO(io)
+const store = new Store()
+client.useStore(store)
+const am = actionManager()
+am.addAction()
+client.am = am;
+
 ```
 
 具体如下：
@@ -31,7 +39,7 @@ const client = {
   - 配置 config
   - 底层服务封装 base-services
     - （状态与错误）这些底层的服务的异常会影响多个顶层服务，所以需要有完备的状态与错误处理逻辑。
-  - 网络协议的基础封装 connectors 
+  - 网络协议的基础封装 connectors
     - http
     - ws
     - mqtt
