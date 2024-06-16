@@ -1,6 +1,6 @@
 {
   "name": "@tikkhun/web-utils",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "type": "module",
   "files": [
     "dist"

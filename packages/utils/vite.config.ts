@@ -5,7 +5,7 @@ const name = packageJson.name.split("/")[1];
 export default defineConfig({
   build: {
     lib: {
-      entry: "./lib/main.ts",
+      entry: "./lib/index.ts",
       name: toBigCamelCase(name),
       fileName: name,
     },
