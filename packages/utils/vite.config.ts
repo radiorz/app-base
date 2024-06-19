@@ -1,8 +1,10 @@
 import { defineConfig } from "vite";
 import packageJson from "./package.json";
+import banner from "vite-plugin-banner";
 import { fileURLToPath, URL } from "node:url";
 const name = packageJson.name.split("/")[1];
 export default defineConfig({
+  plugins: [banner(`@tikkhun/web-utils`)],
   build: {
     lib: {
       entry: "./lib/index.ts",

@@ -57,6 +57,9 @@ importers:
       crypto-js:
         specifier: ^4.2.0
         version: 4.2.0
+      vite-plugin-banner:
+        specifier: ^0.7.1
+        version: 0.7.1
     devDependencies:
       '@types/crypto-js':
         specifier: ^4.2.2
@@ -2349,6 +2352,9 @@ packages:
     resolution: {integrity: sha512-de6HJgzC+TFzOu0NTC4RAIsyf/DY/ibWDYQUcuEA84EMHhcefTUGkjFHKKEJhQN4A+6I0u++kr3l36ZF2d7XRw==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
+
+  vite-plugin-banner@0.7.1:
+    resolution: {integrity: sha512-Bww2Xd5tOGsZ1yZ9rQiGneryvsL1u86znPrqeQjCsXPsG72pnSdV5lcQA+cy8UNDguMqyTJiCevlNUbLnT85UA==}
 
   vite-plugin-dts@3.9.1:
     resolution: {integrity: sha512-rVp2KM9Ue22NGWB8dNtWEr+KekN3rIgz1tWD050QnRGlriUCmaDwa7qA5zDEjbXg5lAXhYMSBJtx3q3hQIJZSg==}
@@ -4817,6 +4823,8 @@ snapshots:
       - sugarss
       - supports-color
       - terser
+
+  vite-plugin-banner@0.7.1: {}
 
   vite-plugin-dts@3.9.1(@types/node@20.14.0)(rollup@4.18.0)(typescript@5.4.5)(vite@5.2.12(@types/node@20.14.0)):
     dependencies:
