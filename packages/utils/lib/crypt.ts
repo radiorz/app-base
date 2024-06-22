@@ -4,9 +4,13 @@ import CryptoJS from "crypto-js";
 const NULL_IV = CryptoJS.enc.Hex.parse(""); // new Buffer([]);
 
 const cryptoOptions = {
+  // 加密模式
   mode: CryptoJS.mode.ECB,
+  // 填充模式
   padding: CryptoJS.pad.Pkcs7,
+  // 初始向量 在 ECB中没用
   iv: NULL_IV,
+  // 密钥大小 表示加密算法使用的密钥的位数
   keySize: 256,
 };
 export class SimpleCrypto {
