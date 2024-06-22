@@ -10,5 +10,5 @@ export function isBiggerThanMinusOne(n: any) {
   return n > -1;
 }
 export function isNativeNumber(n: any) {
-  nativeNumber.test(n);
+  return nativeNumber.test(n);
 }
