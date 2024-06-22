@@ -25,7 +25,6 @@ export class SimpleCrypto {
       this.cryptKey,
       cryptoOptions
     );
-    console.log(`cipherParams.ciphertext`, cipherParams.toString());
     return cipherParams.ciphertext.toString();
   }
 
