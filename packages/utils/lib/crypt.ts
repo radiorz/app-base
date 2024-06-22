@@ -10,7 +10,7 @@ const cryptoOptions = {
   keySize: 256,
 };
 export class SimpleCrypto {
-  private cryptKey: any;
+  cryptKey: CryptoJS.lib.WordArray;
   constructor(private password = "") {
     this.cryptKey = CryptoJS.enc.Utf8.parse(this.password);
   }
@@ -19,9 +19,14 @@ export class SimpleCrypto {
    * @param {*} string
    * @returns {string}
    */
-  aesEncrypt(string = "") {
-    const cipher = CryptoJS.AES.encrypt(string, this.cryptKey, cryptoOptions);
-    return CryptoJS.enc.Hex.stringify(cipher.ciphertext);
+  aesEncrypt(str = "") {
+    const cipherParams = CryptoJS.AES.encrypt(
+      str,
+      this.cryptKey,
+      cryptoOptions
+    );
+    console.log(`cipherParams.ciphertext`, cipherParams.toString());
+    return cipherParams.ciphertext.toString();
   }
 
   /**
@@ -29,12 +34,13 @@ export class SimpleCrypto {
    * @param {*} string
    * @returns {string}
    */
-  aesDecrypt(string = "") {
-    const decipher = CryptoJS.AES.decrypt(
-      CryptoJS.enc.Hex.parse(string).toString(),
-      this.cryptKey,
+  aesDecrypt(str = "") {
+    const words = CryptoJS.enc.Hex.parse(str);
+    const bytes = CryptoJS.AES.decrypt(
+      { ciphertext: words } as CryptoJS.lib.CipherParams,
+      CryptoJS.enc.Utf8.parse(this.password),
       cryptoOptions
     );
-    return CryptoJS.enc.Utf8.stringify(decipher);
+    return bytes.toString(CryptoJS.enc.Utf8);
   }
 }
