@@ -99,3 +99,55 @@ client.am = am;
 ```
 
 ```
+
+## 怎么定义插件系统
+
+- core 提供 hooks 对生命周期进行定义 ，这个很普遍，在 vue react fastify 都有这个身影 当然 react 可以看到 生命周期应该尽量简化主要在于 create 也就是初始化 update 更新 destroyed 销毁。
+
+看了 device 的实现
+
+- logger
+- emitter on off ...
+- config load(from remote/local/default) set get has watchChange
+  - store 一般是内存 store 有时候可能会用到 其他 store
+  - config schema validate load set get
+    - schema 除了校验 还有其他几个功能
+      - private 当 config 更新的时候是否反馈给 remote
+      - soft 软更新 硬更新
+- status 各种状态管理 但是我们可以简化 service 或者 plugin 的 status 自己管理
+
+- hook
+  - new created 创建
+  - start 启动 
+    - config ready( load config)
+  - config update
+  - config reset(clear)
+  - config paused 暂停
+  - stop 停止
+  - destroyed 销毁
+- service get getStatus
+  - action server
+  - message server /client （消息收发）
+    - 实现技术 mqtt
+  - db
+    - 实现技术 sqlite
+  - http client
+  - http server
+  - finder  设备发现服务 主要给设备发一下初始配置 不然他不知道服务器是哪是哪 本身的网络配置
+  - keepalive server
+跟设备打交道的都知道 使用他们的功能经常需要用到乱七八糟的库
+我们规定 服务
+都包括
+
+- config 
+- action remote/local
+- status
+- message protocal 就是通用的一些逻辑 
+  - 收消息
+    - 解包 
+    - 最后都会会落实转化成 action ，更新status config等。 
+  - 发送 protocal 最重要的就是消息
+    - 
+    - 打包 添加协议字段
+- request 主要是获取信息 这个其实没什么协议 但是就是常用的增删改查 / 登录认证权限 可以封装一下
+- hook 在设备的每个节点做一些事情。
