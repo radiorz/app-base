@@ -1,5 +1,7 @@
 // device 最重要的就是书写生命周期 管理服务
-export interface LifeCycle {}
+export interface LifeCycle {
+  onInit: () => void;
+}
 class Service {
   constructor() {}
   onInit() {}
@@ -13,9 +15,7 @@ class MessageManager {
 }
 class ReqeustManager {}
 class ResourceProtocal {
-  onChange() {
-    
-  }
+  onChange() {}
 }
 class ServiceManager {}
 interface DoOptions {
