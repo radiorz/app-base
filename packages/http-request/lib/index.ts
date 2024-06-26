@@ -17,10 +17,6 @@ export class RemoteStore {
     return result.data.payload.token;
   }
 }
-interface LocalStoreAdapter {
-  get: (path: string) => any;
-  set: (path: string, data: any) => any;
-}
 
 class LocalStore implements Api {
   store: Record<string, any> = {};
