@@ -1,6 +1,7 @@
 import axios from "axios";
 import { get, merge, set } from "lodash";
 import { Api, GetOptions, RemoveOptions, SetOptions } from "./Api";
+import { defineConfig } from "tsup";
 export interface GetTokenOptions {
   username: string;
   password: string;
@@ -98,6 +99,22 @@ export class Auth {
   removeToken() {
     return this.options.localStore.remove(Auth.TOKEN_KEY);
   }
+  isTokenNotNeed(config: any) {
+    return config.url === "/login" || config.url === "login";
+  }
+  // intercepter
+  async withRequestToken(config: any) {
+    if (this.isTokenNotNeed(config)) {
+      return config;
+    }
+    // 这里要忽略登录
+    let token = await this.getToken();
+    if (token) {
+      config.headers["X-Token"] = token;
+      config.headers["Authorization"] = `Bearer ${token}`;
+    }
+    return config;
+  }
 }
 class FetchStategy {
   // static retry(func, times) {}
@@ -133,7 +150,9 @@ export class Request {
     const { ...axiosOptions } = this.opts;
     // init
     this.instance = axios.create(axiosOptions);
-    this.instance.interceptors.request.use(this.withRequestToken.bind(this));
+    this.instance.interceptors.request.use(
+      this.auth.withRequestToken.bind(this.auth)
+    );
     this.instance.interceptors.response.use([
       this.withResponseSuccess.bind(this),
       this.withResponseError.bind(this),
@@ -151,19 +170,7 @@ export class Request {
   async init() {
     await this.auth.init(this);
   }
-  async withRequestToken(config: any) {
-    if (config.url === "/login") {
-      return config;
-    }
-    // 这里要忽略登录
-    let token = await this.auth.getToken();
-    console.log(`token`, token);
-    if (token) {
-      config.headers["X-Token"] = token;
-      config.headers["Authorization"] = `Bearer ${token}`;
-    }
-    return config;
-  }
+
   isResponseRight(response: any) {
     const { status } = response || {};
     if (status === 201 || status === 200) {

@@ -1,6 +1,6 @@
 {
-  "name": "@tikkhun/utils",
-  "version": "1.0.4",
+  "name": "@tikkhun/request",
+  "version": "0.0.1",
   "description": "",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
