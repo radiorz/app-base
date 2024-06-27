@@ -18,10 +18,11 @@ export interface AuthProtocol {
   refresh(): void;
 }
 
+type Callback = (message: Message) => void;
 export interface ReceiverProtocol {
   name: string;
   adapter: Adapter;
-  onMessage(callback: any): void;
+  onMessage(callback: Callback, options: OnMessageOptions): void;
 }
 
 export interface Protocol extends SenderProtocol, ReceiverProtocol {
@@ -39,22 +40,14 @@ export interface SenderAdapter {
   send(message: any): boolean;
 }
 export interface ReceiverAdapter {
-  onMessage(callback: any): void;
+  onMessage(callback: Callback): void;
 }
 export interface Adapter extends SenderAdapter, ReceiverAdapter {}
 
-// 使用
-export class AdapterImpl implements Adapter {
-  send(message: any): boolean {
-    throw new Error("Method not implemented.");
-  }
-  onMessage(callback: any): void {
-    throw new Error("Method not implemented.");
-  }
-}
 export interface ProtocolOptions {
   adapter: Adapter;
 }
+interface OnMessageOptions {}
 export class ProtocolImpl implements Protocol {
   adapter: Adapter;
   constructor(opts: ProtocolOptions) {
@@ -63,7 +56,7 @@ export class ProtocolImpl implements Protocol {
   sendMessage(message: Message): boolean {
     return this.adapter.send(message);
   }
-  onMessage(callback: any): void {
+  onMessage(callback: any, options: OnMessageOptions): void {
     throw new Error("Method not implemented.");
   }
   buildMessage(message: any): Message {
@@ -79,7 +72,7 @@ export class WsAdapter implements Adapter {
   send(message: any): boolean {
     throw new Error("Method not implemented.");
   }
-  onMessage(callback: any): void {
+  onMessage(callback: Callback): void {
     throw new Error("Method not implemented.");
   }
   name: string = "WsAdapter";
