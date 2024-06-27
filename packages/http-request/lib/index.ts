@@ -1,7 +1,6 @@
 import axios from "axios";
 import { get, merge, set } from "lodash";
 import { Api, GetOptions, RemoveOptions, SetOptions } from "./Api";
-import { defineConfig } from "tsup";
 export interface GetTokenOptions {
   username: string;
   password: string;
@@ -115,17 +114,28 @@ export class Auth {
 class FetchStategy {
   // static retry(func, times) {}
 }
-
-export interface RequestOptions {
+export interface AxiosOptions {
   baseURL: string;
   timeout: number;
   headers: any;
+}
+export interface RetryStrategy {}
+export interface ResourceProtocal {
+  // 增删改查
+}
+export interface RequestOptions extends Partial<AxiosOptions> {
+  auth: Auth;
+  retryStrategy: RetryStrategy;
+  resourceProtocol: ResourceProtocal;
 }
 function getRequestDefaultOptions() {
   return {
     baseURL: "",
     timeout: 10 * 1000,
     headers: {},
+    auth: null,
+    retryStrategy: null,
+    resourceProtocol: null,
   };
 }
 export class Request {
@@ -140,15 +150,21 @@ export class Request {
   patch: any;
   options: any;
   opts: RequestOptions;
-  constructor(public auth: Auth, options?: Partial<RequestOptions>) {
-    const opts = merge(getRequestDefaultOptions(), options);
-    this.opts = opts;
-    const { ...axiosOptions } = this.opts;
+  auth?: Auth;
+  retryStrategy?: RetryStrategy;
+  resourceProtocal?: ResourceProtocal;
+  constructor(options?: Partial<RequestOptions>) {
+    this.opts = merge(getRequestDefaultOptions(), options);
+    const { auth, retryStrategy, resourceProtocol, ...axiosOptions } =
+      this.opts;
     // init
     this.instance = axios.create(axiosOptions);
-    this.instance.interceptors.request.use(
-      this.auth.withRequestToken.bind(this.auth)
-    );
+    if (auth) {
+      this.auth = auth;
+      this.instance.interceptors.request.use(
+        this.auth.withRequestToken.bind(this.auth)
+      );
+    }
     this.instance.interceptors.response.use([
       this.withResponseSuccess.bind(this),
       this.withResponseError.bind(this),
@@ -164,7 +180,9 @@ export class Request {
     this.options = this.instance.options;
   }
   async init() {
-    await this.auth.init(this);
+    if (this.auth) {
+      await this.auth.init(this);
+    }
   }
 
   isResponseRight(response: any) {
@@ -197,3 +215,7 @@ export class Request {
     return false;
   }
 }
+
+// TODO 重试策略
+// TODO 资源管理
+// 这个或许得看一下alova 了
