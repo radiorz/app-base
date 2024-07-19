@@ -1,5 +1,5 @@
 import { it, expect } from "vitest";
-import { SimpleCrypto } from "../lib/crypt";
+import { SimpleCrypto } from "./crypt";
 import CryptoJS from "crypto-js";
 it("simple crypto", () => {
   const crypto = new SimpleCrypto("tikkhbodyencryptdecryptpassword1");
