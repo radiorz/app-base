@@ -25,6 +25,6 @@
     "vite-plugin-banner": "^0.7.1"
   },
   "dependencies": {
-    "@tikkhun/config-core": "^0.1.3"
+    "@tikkhun/config-core": "^0.1.4"
   }
 }

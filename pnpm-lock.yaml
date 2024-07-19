@@ -30,8 +30,8 @@ importers:
   packages/config:
     dependencies:
       '@tikkhun/config-core':
-        specifier: ^0.1.3
-        version: 0.1.3
+        specifier: ^0.1.4
+        version: 0.1.4
     devDependencies:
       typescript:
         specifier: ^5.4.5
@@ -779,8 +779,8 @@ packages:
   '@sinclair/typebox@0.27.8':
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
 
-  '@tikkhun/config-core@0.1.3':
-    resolution: {integrity: sha512-W4fnpY5YubuXWwlzTChBh6lg+pWAHaqXmWllazsTNokvq9E0Uh0WK9bS37gk2ax/2ems+egsGMI1H4AU4hVwtA==}
+  '@tikkhun/config-core@0.1.4':
+    resolution: {integrity: sha512-JNNfv0T6NXF3a33JB4/AIt1+kZXQxoGRws8Ze0pB/VFGfdjgw6E2N0MYKpbSUjSWMPE3z/qijW3tul69iPVS0A==}
 
   '@tikkhun/logger@1.0.7':
     resolution: {integrity: sha512-z1o67jXp7X3V1yoBFTPuPsSjBeqPBbPwTlUVdTmev4NDjV6mlP3/+oCZhVQweyyv8xe3PkBHz2K5wIqIRcnurw==}
@@ -3111,7 +3111,7 @@ snapshots:
 
   '@sinclair/typebox@0.27.8': {}
 
-  '@tikkhun/config-core@0.1.3':
+  '@tikkhun/config-core@0.1.4':
     dependencies:
       lodash: 4.17.21
 
