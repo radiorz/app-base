@@ -8,6 +8,47 @@ importers:
 
   .: {}
 
+  examples/reactivity-test:
+    dependencies:
+      '@vue/reactivity':
+        specifier: ^3.4.33
+        version: 3.4.33
+    devDependencies:
+      typescript:
+        specifier: ^5.4.5
+        version: 5.4.5
+      vite:
+        specifier: ^5.2.10
+        version: 5.2.12(@types/node@20.14.0)
+      vite-plugin-banner:
+        specifier: ^0.7.1
+        version: 0.7.1
+      vitest:
+        specifier: ^1.3.1
+        version: 1.6.0(@types/node@20.14.0)
+
+  packages/app-core:
+    dependencies:
+      '@tikkhun/config-core':
+        specifier: ^0.1.5
+        version: 0.1.5
+      mitt:
+        specifier: ^3.0.1
+        version: 3.0.1
+    devDependencies:
+      '@types/node':
+        specifier: ^20.3.1
+        version: 20.14.0
+      ts-node:
+        specifier: ^10.9.1
+        version: 10.9.2(@types/node@20.14.0)(typescript@5.4.5)
+      tsup:
+        specifier: ^8.0.2
+        version: 8.0.2(@microsoft/api-extractor@7.43.0(@types/node@20.14.0))(postcss@8.4.38)(ts-node@10.9.2(@types/node@20.14.0)(typescript@5.4.5))(typescript@5.4.5)
+      vitest:
+        specifier: ^1.3.1
+        version: 1.6.0(@types/node@20.14.0)
+
   packages/client-core:
     dependencies:
       lodash:
@@ -26,31 +67,6 @@ importers:
       tsup:
         specifier: ^8.0.2
         version: 8.0.2(@microsoft/api-extractor@7.43.0(@types/node@20.14.0))(postcss@8.4.38)(ts-node@10.9.2(@types/node@20.14.0)(typescript@5.4.5))(typescript@5.4.5)
-
-  packages/config:
-    dependencies:
-      '@tikkhun/config-core':
-        specifier: ^0.1.5
-        version: 0.1.5
-      '@types/lodash-es':
-        specifier: ^4.17.12
-        version: 4.17.12
-      lodash-es:
-        specifier: ^4.17.21
-        version: 4.17.21
-    devDependencies:
-      typescript:
-        specifier: ^5.4.5
-        version: 5.4.5
-      vite:
-        specifier: ^5.2.10
-        version: 5.2.12(@types/node@20.14.0)
-      vite-plugin-banner:
-        specifier: ^0.7.1
-        version: 0.7.1
-      vitest:
-        specifier: ^1.3.1
-        version: 1.6.0(@types/node@20.14.0)
 
   packages/crash-daemon:
     dependencies:
@@ -112,7 +128,32 @@ importers:
         specifier: ^1.3.1
         version: 1.6.0(@types/node@20.14.0)
 
-  packages/utils:
+  packages/web-config:
+    dependencies:
+      '@tikkhun/config-core':
+        specifier: ^0.1.5
+        version: 0.1.5
+      '@types/lodash-es':
+        specifier: ^4.17.12
+        version: 4.17.12
+      lodash-es:
+        specifier: ^4.17.21
+        version: 4.17.21
+    devDependencies:
+      typescript:
+        specifier: ^5.4.5
+        version: 5.4.5
+      vite:
+        specifier: ^5.2.10
+        version: 5.2.12(@types/node@20.14.0)
+      vite-plugin-banner:
+        specifier: ^0.7.1
+        version: 0.7.1
+      vitest:
+        specifier: ^1.3.1
+        version: 1.6.0(@types/node@20.14.0)
+
+  packages/web-utils:
     dependencies:
       crypto-js:
         specifier: ^4.2.0
@@ -938,6 +979,12 @@ packages:
 
   '@vitest/utils@1.6.0':
     resolution: {integrity: sha512-21cPiuGMoMZwiOHa2i4LXkMkMkCGzA+MVFV70jRwHo95dL4x/ts5GZhML1QWuy7yfp3WzK3lRvZi3JnXTYqrBw==}
+
+  '@vue/reactivity@3.4.33':
+    resolution: {integrity: sha512-B24QIelahDbyHipBgbUItQblbd4w5HpG3KccL+YkGyo3maXyS253FzcTR3pSz739OTphmzlxP7JxEMWBpewilA==}
+
+  '@vue/shared@3.4.33':
+    resolution: {integrity: sha512-aoRY0jQk3A/cuvdkodTrM4NMfxco8n55eG4H7ML/CRy7OryHfiqvug4xrCBBMbbN+dvXAetDDwZW9DXWWjBntA==}
 
   abort-controller@3.0.0:
     resolution: {integrity: sha512-h8lQ8tacZYnR3vNQTgibj+tODHI5/+l06Au2Pcriv/Gmet0eaj4TwWH41sO9wnHDiQsEj19q0drzdWdeAHtweg==}
@@ -1841,6 +1888,9 @@ packages:
   minipass@7.1.2:
     resolution: {integrity: sha512-qOOzS1cBTWYF4BH8fVePDBOO9iptMnGUEZwNc/cMWnTV2nVLZ7VoNWEPHkYczZA0pdoA7dl6e7FL659nX9S2aw==}
     engines: {node: '>=16 || 14 >=14.17'}
+
+  mitt@3.0.1:
+    resolution: {integrity: sha512-vKivATfr97l2/QBCYAkXYDbrIWPM2IIKEl7YPhjCvKlG3kE2gm+uBo6nEXK3M5/Ffh/FLpKExzOQ3JJoJGFKBw==}
 
   mlly@1.7.1:
     resolution: {integrity: sha512-rrVRZRELyQzrIUAVMHxP97kv+G786pHmOKzuFII8zDYahFBS7qnHh2AlYSl1GAHhaMPCz6/oHjVMcfFYgFYHgA==}
@@ -3337,6 +3387,12 @@ snapshots:
       loupe: 2.3.7
       pretty-format: 29.7.0
 
+  '@vue/reactivity@3.4.33':
+    dependencies:
+      '@vue/shared': 3.4.33
+
+  '@vue/shared@3.4.33': {}
+
   abort-controller@3.0.0:
     dependencies:
       event-target-shim: 5.0.1
@@ -4345,6 +4401,8 @@ snapshots:
   minimist@1.2.8: {}
 
   minipass@7.1.2: {}
+
+  mitt@3.0.1: {}
 
   mlly@1.7.1:
     dependencies:

@@ -1,0 +1,19 @@
+.light-scanning {
+  -webkit-text-fill-color: transparent;
+  background: linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0) 40%,
+      rgba(255, 255, 255, 0.7),
+      rgba(255, 255, 255, 0) 60%
+    ) -100%/50% no-repeat currentColor;
+  background-clip: text;
+  animation: light-scanning-animate 1s infinite;
+}
+@keyframes light-scanning-animate {
+  form {
+    background-position: -100%;
+  }
+  to {
+    background-position: 200%;
+  }
+}
