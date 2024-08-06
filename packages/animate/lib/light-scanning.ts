@@ -1,3 +1,1 @@
-// export function lightScanning(el: HTMLElement) {
-//   el.style.
-// }
+export function lightScanning(el: HTMLElement) {}
