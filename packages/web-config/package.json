@@ -1,6 +1,6 @@
 {
   "name": "@tikkhun/web-config",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "type": "module",
   "files": [
     "dist"
@@ -19,13 +19,13 @@
     "test": "vitest"
   },
   "devDependencies": {
-    "typescript": "^5.4.5",
-    "vite": "^5.2.10",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.2",
     "vite-plugin-banner": "^0.7.1",
-    "vitest": "^1.3.1"
+    "vitest": "^2.0.5"
   },
   "dependencies": {
-    "@tikkhun/config-core": "^0.1.5",
+    "@tikkhun/config-core": "^0.1.6",
     "@types/lodash-es": "^4.17.12",
     "lodash-es": "^4.17.21"
   }

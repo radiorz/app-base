@@ -1,5 +1,8 @@
-import { lightScanning } from "../lib";
-const el = document.getElementById("light-scanning-box");
-if (el) {
-  lightScanning(el);
-}
+// import { lightScanning } from "../lib";
+// const app = document.querySelector('#app')
+// app?.appendChild(
+// )
+// const el = document.getElementById("light-scanning");
+// if (el) {
+//   lightScanning(el);
+// }

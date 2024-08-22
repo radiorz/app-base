@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Smooth Marquee Effect with Inline Styles</title>
+</head>
+
+<body>
+
+  <div id="marqueeContainer">
+    <span id="marqueeText">This is a smooth marquee text that moves from right to left.</span>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const marqueeText = document.getElementById('marqueeText');
+      const marqueeContainer = document.getElementById('marqueeContainer');
+
+      // Measure the widths
+      const textWidth = marqueeText.offsetWidth;
+      const containerWidth = marqueeContainer.offsetWidth;
+
+      // Set initial inline styles
+      marqueeText.style.position = 'absolute';
+      marqueeText.style.whiteSpace = 'nowrap';
+      marqueeText.style.left = containerWidth + 'px'; // Start from the right side
+
+      // Set the animation duration
+      const animationDuration = (textWidth / containerWidth) * 10; // Adjust the speed by changing the multiplier
+      marqueeText.style.animationDuration = `${animationDuration}s`;
+
+      // Define the keyframe animation
+      const keyframes = `
+            @keyframes marquee {
+                from { left: ${containerWidth}px; }
+                to { left: -${textWidth}px; }
+            }
+        `;
+
+      // Inject the keyframe animation into the document
+      const styleSheet = document.createElement('style');
+      styleSheet.type = 'text/css';
+      styleSheet.innerText = keyframes;
+      document.head.appendChild(styleSheet);
+
+      // Apply the animation to the marquee text
+      marqueeText.style.animationName = 'marquee';
+      marqueeText.style.animationTimingFunction = 'linear';
+      marqueeText.style.animationIterationCount = 'infinite';
+    });
+  </script>
+
+</body>
+
+</html>
