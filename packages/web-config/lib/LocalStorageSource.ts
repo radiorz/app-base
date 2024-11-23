@@ -13,19 +13,20 @@
  */
 
 import { ConfigSource } from "@tikkhun/config-core";
+import { optionsMerge } from "@tikkhun/utils-core";
 import { debounce } from "lodash-es";
-export interface LocalStorageSourceOptions {
-  key: string;
-  saveDebounce: number;
-}
-export const DEFAULT_LOCAL_STORAGE_SOURCE_OPTIONS = {
-  key: "config",
-  saveDebounce: 200,
-};
+
 export class LocalStorageSource implements ConfigSource {
-  options: LocalStorageSourceOptions;
-  constructor(options?: Partial<LocalStorageSourceOptions>) {
-    this.options = Object.assign(DEFAULT_LOCAL_STORAGE_SOURCE_OPTIONS, options);
+  static defaultOptions = Object.freeze({
+    // 存储的键值对
+    key: "config",
+    // 存储的
+    saveDebounce: 200,
+    emitError: true,
+  });
+  options: typeof LocalStorageSource.defaultOptions;
+  constructor(options?: Partial<typeof LocalStorageSource.defaultOptions>) {
+    this.options = optionsMerge(LocalStorageSource.defaultOptions, options);
     this.save = debounce(this.save.bind(this), this.options.saveDebounce);
   }
   load() {
@@ -36,11 +37,12 @@ export class LocalStorageSource implements ConfigSource {
       }
       return JSON.parse(config);
     } catch (error) {
-      return {};
+      if (this.options.emitError) throw error;
+      return null;
     }
   }
   // 这里应该搞个debounce
   save(config: Record<string, any>) {
-    localStorage.setItem("config", JSON.stringify(config));
+    localStorage.setItem(this.options.key, JSON.stringify(config));
   }
 }
