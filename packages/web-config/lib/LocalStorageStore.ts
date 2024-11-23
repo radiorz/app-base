@@ -6,9 +6,9 @@ interface ConfigStorage {
 }
 
 export class LocalStorageStore implements ConfigStorage {
-  static defaultOptions = Object.freeze({
+  static defaultOptions = {
     key: "config",
-  });
+  };
   options: typeof LocalStorageStore.defaultOptions;
   constructor(options: Partial<typeof LocalStorageStore.defaultOptions>) {
     this.options = optionsMerge(LocalStorageStore.defaultOptions, options);
