@@ -15,17 +15,17 @@
 import { ConfigSource } from "@tikkhun/config-core";
 import { optionsMerge } from "@tikkhun/utils-core";
 import { debounce } from "lodash-es";
-
+export const LocalStorageSourceDefaultOptions = {
+  // 存储的键值对
+  key: "config",
+  // 存储的
+  saveDebounce: 200,
+  emitError: false,
+};
 export class LocalStorageSource implements ConfigSource {
-  static defaultOptions = {
-    // 存储的键值对
-    key: "config",
-    // 存储的
-    saveDebounce: 200,
-    emitError: true,
-  };
-  options: typeof LocalStorageSource.defaultOptions;
-  constructor(options?: Partial<typeof LocalStorageSource.defaultOptions>) {
+  static defaultOptions = Object.freeze(LocalStorageSourceDefaultOptions);
+  options: typeof LocalStorageSourceDefaultOptions;
+  constructor(options?: Partial<typeof LocalStorageSourceDefaultOptions>) {
     this.options = optionsMerge(LocalStorageSource.defaultOptions, options);
     this.save = debounce(this.save.bind(this), this.options.saveDebounce);
   }
